@@ -1,0 +1,5 @@
+mappeR is a topological visualisation algorithm, initially described in
+Topological Methods for the Analysis of High Dimensional Data Sets and 3D Object Recognition 
+Singh, G., Memoli, F., Carlsson, G. (2007)
+
+It requires igraph, fastcluster, MASS and mclust.
