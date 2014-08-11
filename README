@@ -3,3 +3,14 @@ Topological Methods for the Analysis of High Dimensional Data Sets and 3D Object
 Singh, G., Memoli, F., Carlsson, G. (2007)
 
 It requires igraph, fastcluster, MASS and mclust.
+
+Install from folder (on Windows)
+
+# check the package source and documentation
+"path\to\R.exe" CMD check mappeR
+
+# build the source package
+"path\to\R.exe" CMD build --binary mappeR
+
+# build a windows zip
+"path\to\R.exe" INSTALL --build mappeR
