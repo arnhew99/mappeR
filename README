@@ -14,3 +14,8 @@ Install from folder (on Windows)
 
 # build a windows zip
 "path\to\R.exe" INSTALL --build mappeR
+
+Alternatively, use Hadley Wickham's devtools package 
+
+require(devtools)
+install_github("arnhew99/mappeR")
