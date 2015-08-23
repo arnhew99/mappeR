@@ -56,18 +56,15 @@ pairs(iris[,1:4], main = "Anderson's Iris Data -- 3 species",
 iris.mappeR.out <- mappeR(iris[,1:4],6,50,filterEccentricity,singlelinkagehist)
 
 # find the iris types in each cluster (node)
-iris.names <- lapply(iris.mappeR.out$clusters, function(x) return(substr(paste(unique(iris[x,5])),start=1,stop=2)))
+iris.names <- lapply(iris.mappeR.out$clusters, function(x) return(substr(paste(unique(iris[x,5])),1,2)))
 cluster.names <- sapply(iris.names, paste, collapse="/")
 
-# plotting is done with igraph, although the mappeR output contains an adjacency matrix
-require(igraph)
-
+# plotting is done with igraph using the adjacency matrix in the mappeR output 
 plot(iris.mappeR.out,vertex.label=cluster.names,vertex.size=30,edge.width=2)
 
 # identify a circle
-require(MASS)
 x <- runif(2000,0,2*pi)
-X <- cbind(cos(x),sin(x)) + mvrnorm(2000,rep(0,2),diag(2)/100)
+X <- cbind(cos(x),sin(x))
 plot(mappeR(X,6,50,filterCol1,singlelinkagehist))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
