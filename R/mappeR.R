@@ -35,22 +35,22 @@ function(X, n.slices, overlap, filterfn, clusterfn) {
 	
 	# turn this into an adjacency matrix
 	
-  # if two slices share elements, then set a 1 in the adjacency matrix
-  out.fn <- function(x,y) ifelse(length(intersect(x,y)==0),1,0)
-	
-  # vectorize for outer
-  out.fn <- Vectorize(out.fn, vectorize.args=c("x","y"))
+	# if two slices share elements, then set a 1 in the adjacency matrix
+	out.fn <- function(x,y) ifelse(length(intersect(x,y)==0),1,0)
+
+	# vectorize for outer
+	out.fn <- Vectorize(out.fn, vectorize.args=c("x","y"))
 	adjmat <- outer(cluster.allocs.list,cluster.allocs.list,out.fn)
 	
   
 	diag(adjmat) <- 0
 	
-  res <- new.env()
-  res$adjmat <- adjmat
-  res$filter.values <- filter.values
-  res$clusters <- cluster.allocs.list
-  res$slices <- slice.cluster.n
-  class(res) <- "mapper"
+	res <- new.env()
+	res$adjmat <- adjmat
+	res$filter.values <- filter.values
+	res$clusters <- cluster.allocs.list
+	res$slices <- slice.cluster.n
+	class(res) <- "mapper"
   
 	return(res)
 }
