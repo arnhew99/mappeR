@@ -1,5 +1,5 @@
 mappeR <-
-function(X, n.slices, overlap, filterfn, clusterfn) {
+function(X, n.slices, overlap, filterfn, clusterfn, ...) {
 	
 	# allocate obs of X to slices based on n.slices and overlap
 	
@@ -24,7 +24,7 @@ function(X, n.slices, overlap, filterfn, clusterfn) {
 	slice.data <- lapply(slice.allocs, function(x,Z) return(Z[x,]),Z=X)
 	
 	# find the cluster allocations for each slice
-	slice.clusters <- lapply(slice.data, clusterfn)
+	slice.clusters <- lapply(slice.data, clusterfn, ...)
 	
 	# find out which data points are in each cluster
 	slice.cluster.n <- sapply(slice.clusters,max)
