@@ -16,7 +16,7 @@ filterGauss(X,epsilon=1)
   \item{epsilon}{Scale parameter}
 }
 \details{
-The scale parameter is essentially the bandwidth.
+The scale parameter is essentially the bandwidth of a kernel density estimate.
 }
 \value{
 %%  ~Describe the value returned

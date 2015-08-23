@@ -1,21 +1,22 @@
-\name{filterCol1}
-\alias{filterCol1}
+\name{hierarchicalhist}
+\alias{hierarchicalhist}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Example filter function.
+Computes a single linkage clustering (histogram method).
 }
 \description{
-Filter function returns a 1-d vector taking data matrix as input. As an example, we output the first column of the matrix.
+Computes a clustering of a data matrix, using single linkage.
 }
 \usage{
-filterCol1(X)
+hierarchicalhist(X)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{X}{Data matrix}
+  \item{method}{Type of hierarchical clustering method, as in \code{hclust}}
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+The \code{method} value may be passed through to this function as an additional option to the main \code{mappeR} function.
 }
 \value{
 %%  ~Describe the value returned
@@ -23,7 +24,7 @@ filterCol1(X)
 %%  \item{comp1 }{Description of 'comp1'}
 %%  \item{comp2 }{Description of 'comp2'}
 %% ...
-A vector of filter values.
+A vector containing the members (rows of X) of each cluster.
 }
 \references{
 %% ~put references to the literature/web site here ~

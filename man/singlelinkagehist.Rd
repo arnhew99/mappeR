@@ -15,7 +15,7 @@ singlelinkagehist(X)
   \item{X}{Data matrix}
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+This a special case of the \code{hierarchicalhist} function with \code{method="single"}.
 }
 \value{
 %%  ~Describe the value returned

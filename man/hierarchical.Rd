@@ -1,11 +1,11 @@
-\name{singlelinkage}
-\alias{singlelinkage}
+\name{hierarchical}
+\alias{hierarchical}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Single linkage clustering
+Hierarchical clustering
 }
 \description{
-Computes a single linkage clustering of a data matrix at a certain threshold.
+Computes a hierarchical clustering of a data matrix at a certain threshold.
 }
 \usage{
 singlelinkage(X,h)
@@ -13,10 +13,11 @@ singlelinkage(X,h)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{X}{Data matrix}
+  \item{method}{Type of hierarchical clustering method, as in \code{hclust}}
   \item{h}{Threshold}
 }
 \details{
-This is a special case of the general hierarchical clustering function \code{hierarchical} using \code{method="single"}. The threshold \code{h} may be passed through as an additional argument in the main mappeR function.
+The threshold \code{h} may be passed through as an additional argument in the main mappeR function.
 }
 \value{A vector containing the members (rows of X) of each cluster.}
 \references{}
