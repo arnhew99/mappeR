@@ -1,5 +1,5 @@
 mappeR <-
-function(X, n.slices, overlap, filterfn, clusterfn, ...) {
+function(X, useParallel=TRUE, cl=NULL, ncores=detectCores(), n.slices, overlap, filterfn, clusterfn, ...) {
 	
 	# allocate obs of X to slices based on n.slices and overlap
 	
@@ -24,7 +24,29 @@ function(X, n.slices, overlap, filterfn, clusterfn, ...) {
 	slice.data <- lapply(slice.allocs, function(x,Z) return(Z[x,]),Z=X)
 	
 	# find the cluster allocations for each slice
-	slice.clusters <- lapply(slice.data, clusterfn, ...)
+	if (useParallel) {
+		# set up a cluster if not given one
+		if (is.null(cl)) {
+			cl <- makeCluster(ncores, "SOCK")
+			startedCluster <- TRUE
+		}
+		
+		# make sure mappeR is available
+		clusterEvalQ(cl, require(mappeR))
+		
+		# do the clustering 
+		slice.clusters <- parLapply(cl, slice.data, clusterfn, ...)
+		
+		# shutdown the cluster if we started one
+		if (startedCluster) {
+			stopCluster(cl)
+			rm(cl)
+		}
+		
+		
+	} else {
+		slice.clusters <- lapply(slice.data, clusterfn, ...)
+	}
 	
 	# find out which data points are in each cluster
 	slice.cluster.n <- sapply(slice.clusters,max)

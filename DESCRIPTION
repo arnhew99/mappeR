@@ -2,10 +2,10 @@ Package: mappeR
 Type: Package
 Title: Implements a topological visualisation algorithm
 Version: 0.2
-Date: 2015-08-23
+Date: 2015-08-25
 Author: Matthew Arnold
 Maintainer: <arnhew99.github@outlook.com>
 Description: Implements the Mapper algorithm, for low-dimensional representations of topological structure in (possibly) high-dimensional data.
 License: GPL-3
-Depends: igraph, fastcluster, mclust, fields
+Depends: igraph, fastcluster, mclust, fields, parallel
 ByteCompile: yes
