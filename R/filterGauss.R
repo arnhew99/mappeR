@@ -1,6 +1,6 @@
 # Gaussian density filter from Mapper paper
 
-filterGauss2 <-
+filterGauss <-
 function(X,epsilon=1) {
 	
 	dX <- as.matrix(dist(X))
