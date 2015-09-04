@@ -1,18 +1,15 @@
 mappeR <-
-function(X, useParallel=TRUE, cl=NULL, ncores=detectCores(), n.slices, overlap, filterfn, clusterfn, ...) {
+function(X, useParallel=TRUE, cl=NULL, ncores=detectCores(), n.slices, overlap, slicesMethod="quantile", filterfn, clusterfn, ...) {
 	
 	# allocate obs of X to slices based on n.slices and overlap
 	
 	if (is.function(filterfn)) { filter.values <- filterfn(X) } else { filter.values <- filterfn }
 	filter.length <- max(filter.values) - min(filter.values)
 	
-	# complicated code to extract the slice limits
-	slices <- seq(from=min(filter.values),to=max(filter.values),length.out=(2*n.slices + 1))
-	slice.centres <- slices[seq(from=2,to=2*n.slices,by=2)]
-	slice.lims <- slices[-seq(from=2,to=2*n.slices,by=2)]
-	slice.lims <- cbind(slice.lims[1:n.slices],slice.lims[2:(n.slices+1)])
-	overlap.x <- (slice.lims[2] - slice.lims[1])*overlap/100
-	slice.lims <- cbind(slice.lims[,1] - overlap.x,slice.lims[,2] + overlap.x)
+	if (slicesMethod == "quantile") slicesFn <- slicesQuantile else slicesFn <- slicesOriginal
+	
+	# find the edges of the slices
+	slice.lims <- slicesFn(filter.values=filter.values, n.slices=n.slices, overlap=overlap)
 
 	# find out which filtervalues are in which slice
 	slice.allocs <- mapply(	function(x,y,z) intersect(which(z > x),which(z < y)), 
@@ -67,7 +64,7 @@ function(X, useParallel=TRUE, cl=NULL, ncores=detectCores(), n.slices, overlap, 
   
 	diag(adjmat) <- 0
 	
-	res <- new.env()
+	res <- list()
 	res$adjmat <- adjmat
 	res$filter.values <- filter.values
 	res$clusters <- cluster.allocs.list
